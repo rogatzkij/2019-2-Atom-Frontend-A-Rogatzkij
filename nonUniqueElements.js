@@ -25,6 +25,19 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 function nonUniqueElements(data) {
-  // your solution goes here
-  return data
+  const map = new Map()
+
+  data.forEach(key => {
+    
+    if (typeof(map[key]) === 'undefined'){
+      map[key] = 1
+    } else {
+      map[key]+=1 
+    }
+
+  })
+
+  return data.filter( elem => map[elem] > 1)
 }
+
+export default nonUniqueElements

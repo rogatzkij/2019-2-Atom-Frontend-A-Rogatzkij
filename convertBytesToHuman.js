@@ -7,5 +7,12 @@
  */
 
 function convertBytesToHuman(bytes) {
-  // your solution goes here
+  if ( Number.isInteger(bytes) ){
+    if ( (bytes >= 0) && (bytes <= 255)){
+      return bytes
+    }
+  }
+  return false
 }
+
+export default convertBytesToHuman

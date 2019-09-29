@@ -18,6 +18,16 @@ correctSentence("Greetings, friends.") == "Greetings, friends."
  */
 
 function correctSentence(text) {
-  // your solution goes here
-  return text;
+  // Первая буква к верхнему регистру
+  let str = text.split('')
+  str[0] = str[0].toUpperCase()
+  str = str.join('')
+
+  // если надо, на конце ставим точку
+  if(! str.endsWith('.')){
+    str = str.concat('.')
+  }
+  return str
 }
+
+export default correctSentence
