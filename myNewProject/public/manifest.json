@@ -1,0 +1,15 @@
+{
+  "short_name": "2019 2 Atom Frontend a Rogatzkij",
+  "name": "2019 2 Atom Frontend a Rogatzkij",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
