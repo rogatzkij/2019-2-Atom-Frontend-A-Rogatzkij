@@ -4,6 +4,10 @@ node_js:
 cache:
   directories:
   - node_modules
+
+before_install:
+  - cd web-components
+
 script:
   # - npm test
   - npm run build
