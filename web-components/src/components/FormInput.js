@@ -6,7 +6,6 @@ template.innerHTML = `
             outline: none;
             width: calc(100% - 2px);
         }
-
         :host {
             display: inline-block;
             border: 1px solid rgba(25, 25, 25, 0.32);

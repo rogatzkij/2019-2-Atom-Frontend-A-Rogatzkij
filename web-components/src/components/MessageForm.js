@@ -5,17 +5,44 @@ template.innerHTML = `
             width: 100%;
         }
 
-        .result {
-            color: red;
-        }
-
         input[type=submit] {
             visibility: collapse;
         }
+
+        .result{
+          display: flex;
+          flex-direction: column;
+        }
+
+        .left{
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .right{
+          display: flex;
+          justify-content: flex-start;
+        }
+
+        .message-field{
+          min-width: 20%;
+          border-style: 1px solid rgb(223, 190, 255);
+          border-radius: 8px;
+
+          background-color: rgb(223, 190, 255);
+        }
+
+        .message-input {
+          display: flex;
+          flex-direction: column;
+        }
+
     </style>
     <form>
         <div class="result"></div>
-        <form-input name="message-text" placeholder="Введите сообщеине"></form-input>
+        <div class="message-input">
+          <form-input name="message-text" placeholder="Сообщение"></form-input>
+        </div>
     </form>
 `;
 
@@ -31,29 +58,18 @@ class MessageForm extends HTMLElement {
     this.$form.addEventListener('submit', this.onSubmit.bind(this));
     this.$form.addEventListener('keypress', this.onKeyPress.bind(this));
 
+    // Чение сообщение из local storage
+    this.msgCount = 0; // кол-во сообщений
+
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
       try {
+        // unmarshal'им в обьект (время, текст, автор)
         const obj = JSON.parse(localStorage.getItem(key));
-        const time = Date(key);
-
-        const msgField = document.createElement('div');
-        msgField.className = 'message-field';
-        this.$message.appendChild(msgField);
-
-        const msgText = document.createElement('div');
-        msgText.className = 'message-field-text';
-        msgText.innerText = obj.text;
-        msgField.appendChild(msgText);
-
-        const msgTime = document.createElement('div');
-        msgTime.className = 'message-field-time';
-        msgTime.innerText = time.toString();
-        msgField.appendChild(msgTime);
-
-        // alert(`${key}: ${obj.text}`);
+        this.createMessage(obj.text, obj.time, true);
+        this.msgCount += 1;
       } catch {
-        console.log('=(');
+        console.log('Can not unmarshal from JSON');
       }
     }
   }
@@ -61,27 +77,41 @@ class MessageForm extends HTMLElement {
   onSubmit(event) {
     event.preventDefault();
 
-    const now = Date.now();
-
-    const msgField = document.createElement('div');
-    msgField.className = 'message-field';
-    this.$message.appendChild(msgField);
-
-    const msgText = document.createElement('div');
-    msgText.className = 'message-field-text';
-    msgText.innerText = this.$input.value;
-    msgField.appendChild(msgText);
-
-    const msgTime = document.createElement('div');
-    msgTime.className = 'message-field-time';
-    msgTime.innerText = now.toString();
-    msgField.appendChild(msgTime);
-
     const msgData = {};
     msgData.text = this.$input.value;
     msgData.author = 'me';
 
-    localStorage.setItem(now.toString(), JSON.stringify(msgData));
+    const now = new Date();
+    msgData.time = `${now.getHours()}:${now.getMinutes()}`;
+
+    this.msgCount += 1;
+    this.createMessage(msgData.text, msgData.time, true);
+    localStorage.setItem(this.msgCount, JSON.stringify(msgData));
+  }
+
+  // отрисовка сообщения на странице
+  createMessage(text, time, left) {
+    const msgPosition = document.createElement('div');
+    if (left === true) {
+      msgPosition.className = 'left';
+    } else {
+      msgPosition.className = 'right';
+    }
+    this.$message.appendChild(msgPosition);
+
+    const msgField = document.createElement('div');
+    msgField.className = 'message-field';
+    msgPosition.appendChild(msgField);
+
+    const msgText = document.createElement('div');
+    msgText.className = 'message-field-text';
+    msgText.innerText = text;
+    msgField.appendChild(msgText);
+
+    const msgTime = document.createElement('div');
+    msgTime.className = 'message-field-time';
+    msgTime.innerText = time;
+    msgField.appendChild(msgTime);
   }
 
   onKeyPress(event) {
