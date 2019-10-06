@@ -5,14 +5,14 @@ cache:
   directories:
   - node_modules
 script:
-  - npm test
+  # - npm test
   - npm run build
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $repo_token
-  local_dir: build
+  local_dir: web-components/build
   on:
     branch:
       - master
