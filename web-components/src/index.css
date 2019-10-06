@@ -16,4 +16,14 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 20px;
+
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.message-block {
+    display: flex;
+    flex-direction: column;
 }
