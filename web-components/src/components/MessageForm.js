@@ -1,130 +1,6 @@
 const template = document.createElement('template');
 template.innerHTML = `
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=cyrillic');
-
-    body{
-        margin: 0px;
-        font-family: 'Roboto', sans-serif;
-    }
-    
-    .page{
-        display: flex;
-        flex-direction: column;
-        background-color: darkgreen;
-    
-        width: 100vw;
-        height: 100vh;
-    }
-    
-    .header{
-        display: flex;
-        flex-grow: 0;
-        height: 80px;
-        background-color: #8d24aa;
-    }
-    
-    .content{
-        display: flex;
-        flex-grow: 1;
-        overflow-y: scroll;
-        flex-direction: column-reverse;
-        height: 100vh;  
-        background-color: #f8f8f8;
-    }
-    
-    .content::-webkit-scrollbar{
-        display: none;
-    }
-    
-    .message-box{
-        display: flex;
-        flex-direction: column;
-    
-        padding-bottom: 5px;
-        justify-content: flex-end;
-        align-items: flex-start;
-        width: 100%;
-    }
-    
-    /* Сообщение */
-    .message{
-        display: flex;
-        flex-direction: column;
-        
-        max-width: 60%;
-        
-        margin: 5px 10px 5px 10px;
-        padding: 10px;
-        background-color: #f3e6f5;
-    
-        border-radius: 4px;
-        border: 1px solid #e7dce9;
-        box-shadow: 0 0 5px #c2bcc37e;
-    }
-    
-    .message > p{
-        font-size: 20px;
-    }
-    
-    .author{
-        align-self: flex-end;
-        background-color: #fff;
-    }
-    
-    /* Текст сообщения */
-    .message-content{
-        /* Пренос слов */
-        overflow-wrap: break-word;
-    
-        display: block;
-    }
-    
-    /* Блок с временем и галочкой */
-    .message-meta{
-        display: flex;
-        justify-content: flex-end;
-        align-items: baseline;
-    }
-    
-    /* Время сообщения */
-    .meta-time{
-        display: inline;
-        font-size: 14px;
-    
-        color: #918791;
-    }
-    
-    /* Галочка у сообщения */
-    .meta-status{
-        display: none;
-    
-        margin-left: 5px;
-        width: 10px;
-        height: 10px;   
-    }
-    
-    .author > .message-meta > .meta-status{
-        display: inline-block;
-    
-        background: url(img/check.png) 100% 100% no-repeat; /* Добавляем фон */
-        background-size: cover; /* Масштабируем фон */  
-    }
-    
-    .readen > .message-meta > .meta-status{
-        background: url(img/double_check.png) 100% 100% no-repeat; /* Добавляем фон */
-        background-size: cover; /* Масштабируем фон */
-    }
-    
-    
-    .footer{
-        display: flex;
-        flex-grow: 0;
-        height: 50px;
-    
-        background-color: coral;
-    }
-    </style>
+    <link href="shadow.css" rel="stylesheet"><link href="shadow.css" rel="stylesheet"></head>
     <form>
         <div class="page">
             <div class="header">head</div>
@@ -171,10 +47,10 @@ class MessageForm extends HTMLElement {
       try {
         // unmarshal'им в обьект (время, текст, автор)
         const obj = JSON.parse(localStorage.getItem(key));
-        this.createMessage(obj.text, obj.time, true);
+        this.createMessage(obj.text, obj.time, obj.isAuthor);
         this.msgCount += 1;
       } catch {
-        console.log('Can not unmarshal from JSON');
+        // console.log('Can not unmarshal from JSON');
       }
     }
   }
@@ -184,7 +60,7 @@ class MessageForm extends HTMLElement {
 
     const msgData = {};
     msgData.text = this.$input.value;
-    msgData.author = 'me';
+    msgData.isAuthor = true;
 
     const now = new Date();
     msgData.time = `${now.getHours()}:${now.getMinutes()}`;
@@ -192,6 +68,8 @@ class MessageForm extends HTMLElement {
     this.msgCount += 1;
     this.createMessage(msgData.text, msgData.time, true);
     localStorage.setItem(this.msgCount, JSON.stringify(msgData));
+
+    this.$input.value = '';
   }
 
   // отрисовка сообщения на странице
