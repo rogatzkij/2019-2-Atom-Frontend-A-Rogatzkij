@@ -20,4 +20,4 @@ deploy:
   on:
     branch:
       - master
-      - devel/hw2
+      - devel
