@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
+    "airbnb": "0.0.2",
     "babel-core": "^6.26.3",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.2.0",
