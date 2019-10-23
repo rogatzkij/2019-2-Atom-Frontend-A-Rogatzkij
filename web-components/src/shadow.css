@@ -104,12 +104,12 @@
     .author > .message-meta > .meta-status{
         display: inline-block;
     
-        /* background: url(img/check.png) 100% 100% no-repeat;  */
+        background: url("./img/check.png") 100% 100% no-repeat; 
         background-size: cover; /* Масштабируем фон */  
     }
     
     .readen > .message-meta > .meta-status{
-        /* background: url(img/double_check.png) 100% 100% no-repeat; */
+        background: url("./img/double_check.png") 100% 100% no-repeat;
         background-size: cover; /* Масштабируем фон */
     }
     

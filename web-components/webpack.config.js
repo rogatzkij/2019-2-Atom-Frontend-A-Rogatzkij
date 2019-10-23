@@ -4,6 +4,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const SRC_PATH = path.resolve(__dirname, 'src');
 const BUILD_PATH = path.resolve(__dirname, 'build');
@@ -41,6 +42,7 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            options: { url: false },
           },
         ],
       },
@@ -69,5 +71,8 @@ module.exports = {
       filename: 'index.html',
       template: './index.html',
     }),
+    new CopyPlugin([
+      { from: 'img', to: 'img' },
+    ]),
   ],
 };

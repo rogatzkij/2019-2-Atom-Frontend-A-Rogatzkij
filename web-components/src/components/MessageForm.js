@@ -1,6 +1,7 @@
 const template = document.createElement('template');
 template.innerHTML = `
-    <link href="shadow.css" rel="stylesheet"><link href="shadow.css" rel="stylesheet"></head>
+    <link href="shadow.css" rel="stylesheet"
+    ><link href="shadow.css" rel="stylesheet"></head>
     <form>
         <div class="page">
             <div class="header">head</div>
