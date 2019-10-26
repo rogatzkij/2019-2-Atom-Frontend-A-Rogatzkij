@@ -1,23 +1,15 @@
-import shadowStyles from '../shadow.css';
+import shadowStyles from './style/shadow.css';
 
 const template = document.createElement('template');
 template.innerHTML = `
     <style>${shadowStyles.toString()}</style>
+    
     <form>
         <div class="page">
             <div class="header">head</div>
+            
             <div class="content">
-                <div class="message-box">
-
-                    <div class="message">
-                        <span class="message-content">Бла бла</span>
-                        <div class="message-meta">
-                            <span class="meta-time">12:31</span>
-                            <div class="meta-status"></div>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="message-box"></div>
             </div>
 
             <div class="footer">
@@ -42,24 +34,44 @@ class MessageForm extends HTMLElement {
     this.$form.addEventListener('submit', this.onSubmit.bind(this));
     this.$form.addEventListener('keypress', this.onKeyPress.bind(this));
 
-    // Чение сообщение из local storage
-    this.msgCount = 0; // кол-во сообщений
+    this.KEY = 'me';
 
-    for (let i = 0; i < localStorage.length; i += 1) {
-      const key = localStorage.key(i);
+    // Чтение сообщение из local storage
+    this.messageArchive = {}; // string --> array of object
+    this.messageArchive[this.KEY] = [];
+
+    const jsonData = localStorage.getItem('archive');
+    if(jsonData !== null){
       try {
-        // unmarshal'им в обьект (время, текст, автор)
-        const obj = JSON.parse(localStorage.getItem(key));
-        this.createMessage(obj.text, obj.time, obj.isAuthor);
-        this.msgCount += 1;
+        this.messageArchive = JSON.parse(jsonData);
       } catch {
-        // console.log('Can not unmarshal from JSON');
+        console.log("somthing was wrong");
       }
+    }
+
+    const curMsgArchive = this.messageArchive[this.KEY];
+
+    for (let i = 0; i < curMsgArchive.length; i += 1) {
+      const curMessage = curMsgArchive[i];
+
+      const msg = document.createElement('msg-field')
+      msg.setAttribute("text", curMessage.text);
+      msg.setAttribute("time", curMessage.time);
+
+      msg.setAttribute("author", "true");
+      msg.setAttribute("readen", "true");
+
+      this.$message.appendChild(msg);
     }
   }
 
   onSubmit(event) {
     event.preventDefault();
+
+    // Не отправляем пустые сообщения
+    if (this.$input.value === ''){
+      return;
+    }
 
     const msgData = {};
     msgData.text = this.$input.value;
@@ -68,40 +80,25 @@ class MessageForm extends HTMLElement {
     const now = new Date();
     msgData.time = `${now.getHours()}:${now.getMinutes()}`;
 
-    this.msgCount += 1;
-    this.createMessage(msgData.text, msgData.time, true);
-    localStorage.setItem(this.msgCount, JSON.stringify(msgData));
+    const curMsgArchive = this.messageArchive[this.KEY];
+    curMsgArchive.push(msgData);
+    this.messageArchive[this.KEY] = curMsgArchive;
 
-    this.$input.value = '';
-  }
+    console.log(JSON.stringify(curMsgArchive));
 
-  // отрисовка сообщения на странице
-  createMessage(text, time, isAuthor) {
-    const msg = document.createElement('div');
-    msg.classList.add('message');
-    if (isAuthor) {
-      msg.classList.add('author');
-    }
+    console.log(JSON.stringify(this.messageArchive));
+    localStorage.setItem('archive', JSON.stringify(this.messageArchive));
+
+    const msg = document.createElement('msg-field');
+    msg.setAttribute("text", msgData.text);
+    msg.setAttribute("time", msgData.time);
+
+    msg.setAttribute("author", "true");
+    msg.setAttribute("readen", "false");
     this.$message.appendChild(msg);
 
-    const msgText = document.createElement('span');
-    msgText.classList.add('message-content');
-    msgText.innerText = text;
-    msg.appendChild(msgText);
-
-    const msgMeta = document.createElement('div');
-    msgMeta.classList.add('message-meta');
-
-    const metaTime = document.createElement('span');
-    metaTime.classList.add('meta-time');
-    metaTime.innerText = time;
-    msgMeta.appendChild(metaTime);
-
-    const metaStatus = document.createElement('div');
-    metaStatus.classList.add('meta-status');
-    msgMeta.appendChild(metaStatus);
-
-    msg.appendChild(msgMeta);
+    // Очищаем поле ввода
+    this.$input.value = '';
   }
 
   onKeyPress(event) {

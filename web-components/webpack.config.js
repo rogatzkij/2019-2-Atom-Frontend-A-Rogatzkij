@@ -36,11 +36,12 @@ module.exports = {
         ],
       },
       {
-        test: /shadow\.css$/,
-        include: SRC_PATH,
+        test: /\.css$/,
+        include: SRC_PATH+"/components/style/",
         use: [
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
+            options: { url: false },
           },
         ],
       },
