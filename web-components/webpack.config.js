@@ -1,3 +1,4 @@
+'use strict';
 
 const path = require('path');
 
@@ -5,6 +6,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+
 
 const SRC_PATH = path.resolve(__dirname, 'src');
 const BUILD_PATH = path.resolve(__dirname, 'build');
@@ -16,7 +18,7 @@ module.exports = {
   },
   output: {
     path: BUILD_PATH,
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   module: {
     strictExportPresence: true,
@@ -28,7 +30,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
+              presets: ['@babel/preset-env']
             },
           },
         ],
@@ -38,11 +40,7 @@ module.exports = {
         include: SRC_PATH,
         use: [
           {
-            loader: MiniCSSExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',
-            options: { url: false },
+            loader: 'css-loader'
           },
         ],
       },
@@ -64,15 +62,12 @@ module.exports = {
     new MiniCSSExtractPlugin({
       filename: 'style.css',
     }),
-    new MiniCSSExtractPlugin({
-      filename: 'shadow.css',
-    }),
-    new HTMLWebpackPlugin({
-      filename: 'index.html',
-      template: './index.html',
-    }),
     new CopyPlugin([
       { from: 'img', to: 'img' },
     ]),
-  ],
+    new HTMLWebpackPlugin({
+      filename: 'index.html',
+      template: './index.html',
+    })
+  ]
 };

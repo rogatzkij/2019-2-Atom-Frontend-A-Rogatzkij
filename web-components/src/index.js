@@ -1,5 +1,4 @@
 import './index.css';
-import './shadow.css';
 
 
 import './components/FormInput';

@@ -1,7 +1,10 @@
+// import shadowStyles from '../shadow.css';
+
+// console.log(shadowStyles.toString());
+
 const template = document.createElement('template');
 template.innerHTML = `
-    <link href="shadow.css" rel="stylesheet"
-    ><link href="shadow.css" rel="stylesheet"></head>
+    
     <form>
         <div class="page">
             <div class="header">head</div>
@@ -18,6 +21,7 @@ template.innerHTML = `
 
                 </div>
             </div>
+            
             <div class="footer">
                 <div class="message-input">
                     <form-input name="message-text" placeholder="Сообщение"></form-input>
