@@ -58,6 +58,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'source-map',
   plugins: [
     new MiniCSSExtractPlugin({
       filename: 'style.css',
