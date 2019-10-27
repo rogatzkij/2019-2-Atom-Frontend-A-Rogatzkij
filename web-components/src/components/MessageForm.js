@@ -15,6 +15,7 @@ template.innerHTML = `
             <div class="footer">
                 <div class="message-input">
                     <form-input name="message-text" placeholder="Сообщение"></form-input>
+                    <div class="btn-send"></div>
                 </div>
             </div>
         </div>
@@ -31,6 +32,9 @@ class MessageForm extends HTMLElement {
     this.$input = this._shadowRoot.querySelector('form-input');
     this.$message = this._shadowRoot.querySelector('.message-box');
 
+    this.$buttonSend = this.shadowRoot.querySelector('.btn-send');
+
+    this.$buttonSend.addEventListener('click', this.onSubmit.bind(this));
     this.$form.addEventListener('submit', this.onSubmit.bind(this));
     this.$form.addEventListener('keypress', this.onKeyPress.bind(this));
 
@@ -78,7 +82,7 @@ class MessageForm extends HTMLElement {
     msgData.isAuthor = true;
 
     const now = new Date();
-    msgData.time = `${now.getHours()}:${now.getMinutes()}`;
+    msgData.time = `${now.getHours().toString()}:${now.getMinutes().toString().padStart(2, '0')}`;
 
     const curMsgArchive = this.messageArchive[this.KEY];
     curMsgArchive.push(msgData);

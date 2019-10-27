@@ -1,15 +1,9 @@
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
-        input {
-            border: 0;
-            outline: none;
-            width: calc(100% - 2px);
-        }
-        :host {
-            display: inline-block;
-            border: 1px solid rgba(25, 25, 25, 0.32);
-        }
+      input{
+        width: 100%;
+      }
     </style>
     <input type="text">
 `;
