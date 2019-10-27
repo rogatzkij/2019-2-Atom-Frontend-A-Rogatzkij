@@ -4,6 +4,7 @@ module.exports = {
     es6: true,
   },
   extends: [
+    'airbnb',
     'eslint-config-airbnb',
   ],
   globals: {
@@ -18,14 +19,13 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    // 'react',
+    'react',
   ],
   rules: {
     'jsx-a11y/href-no-hash': 'off',
     'jsx-a11y/anchor-has-content': 'off',
     'jsx-a11y/anchor-is-valid': ['warn', { aspects: ['invalidHref'] }],
 
-    'no-underscore-dangle': "warn",
-
+    'no-underscore-dangle': 'warn',
   },
 };
