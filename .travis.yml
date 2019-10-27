@@ -6,7 +6,7 @@ before_install:
   - cd web-components
 
 script:
-#  - npm test
+  - npm test
   - npm run build
 
 deploy:

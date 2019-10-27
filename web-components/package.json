@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "test": "eslint ./src/ --ext .js --ignore-pattern node_modules/",
+    "lint_fix": "eslint --fix ./src/ --ext .js --ignore-pattern node_modules/",
     "start": "webpack-dev-server --mode=development --hot",
     "build": "webpack --mode=development"
   },
