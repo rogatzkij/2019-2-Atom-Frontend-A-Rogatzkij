@@ -1,6 +1,6 @@
 {
   "extends": [
-    "airbnb/legacy",
+    "airbnb",
     "react-app",
     "prettier",
     "prettier/react",

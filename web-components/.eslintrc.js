@@ -4,8 +4,7 @@ module.exports = {
     es6: true,
   },
   extends: [
-    "airbnb",
-    // 'eslint-config-airbnb',
+    'eslint-config-airbnb',
   ],
   globals: {
     Atomics: 'readonly',
