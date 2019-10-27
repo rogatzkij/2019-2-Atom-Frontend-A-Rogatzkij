@@ -2,6 +2,7 @@
   "extends": [
     "airbnb",
     "react-app",
+    "eslint-config-airbnb",
     "prettier",
     "prettier/react",
     "plugin:react/recommended"
