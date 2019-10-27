@@ -41,11 +41,11 @@ class MessageForm extends HTMLElement {
     this.messageArchive[this.KEY] = [];
 
     const jsonData = localStorage.getItem('archive');
-    if(jsonData !== null){
+    if (jsonData !== null) {
       try {
         this.messageArchive = JSON.parse(jsonData);
       } catch {
-        console.log("somthing was wrong");
+        console.log('somthing was wrong');
       }
     }
 
@@ -54,12 +54,12 @@ class MessageForm extends HTMLElement {
     for (let i = 0; i < curMsgArchive.length; i += 1) {
       const curMessage = curMsgArchive[i];
 
-      const msg = document.createElement('msg-field')
-      msg.setAttribute("text", curMessage.text);
-      msg.setAttribute("time", curMessage.time);
+      const msg = document.createElement('msg-field');
+      msg.setAttribute('text', curMessage.text);
+      msg.setAttribute('time', curMessage.time);
 
-      msg.setAttribute("author", "true");
-      msg.setAttribute("readen", "true");
+      msg.setAttribute('author', 'true');
+      msg.setAttribute('readen', 'true');
 
       this.$message.appendChild(msg);
     }
@@ -69,7 +69,7 @@ class MessageForm extends HTMLElement {
     event.preventDefault();
 
     // Не отправляем пустые сообщения
-    if (this.$input.value === ''){
+    if (this.$input.value === '') {
       return;
     }
 
@@ -90,11 +90,11 @@ class MessageForm extends HTMLElement {
     localStorage.setItem('archive', JSON.stringify(this.messageArchive));
 
     const msg = document.createElement('msg-field');
-    msg.setAttribute("text", msgData.text);
-    msg.setAttribute("time", msgData.time);
+    msg.setAttribute('text', msgData.text);
+    msg.setAttribute('time', msgData.time);
 
-    msg.setAttribute("author", "true");
-    msg.setAttribute("readen", "false");
+    msg.setAttribute('author', 'true');
+    msg.setAttribute('readen', 'false');
     this.$message.appendChild(msg);
 
     // Очищаем поле ввода

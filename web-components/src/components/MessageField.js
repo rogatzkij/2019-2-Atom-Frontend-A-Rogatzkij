@@ -14,7 +14,7 @@ template.innerHTML = `
 `;
 
 class MessageField extends HTMLElement {
-  constructor(){
+  constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
@@ -38,17 +38,17 @@ class MessageField extends HTMLElement {
         this.$messageTime.innerText = newValue;
         break;
       case 'author':
-        if (newValue === 'true'){
+        if (newValue === 'true') {
           this.$message.classList.add('author');
         }
         break;
       case 'readen':
-        if (newValue === 'true'){
+        if (newValue === 'true') {
           this.$message.classList.add('readen');
         }
         break;
       default:
-        null;
+        console.log(`unknown attribute ${name}`);
     }
   }
 }
