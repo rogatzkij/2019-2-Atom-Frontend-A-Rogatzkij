@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=cyrillic');
+
+    body{
+        margin: 0px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .page{
+        display: flex;
+        flex-direction: column;
+        background-color: darkgreen;
+
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .header{
+        display: flex;
+        flex-grow: 0;
+        height: 80px;
+        background-color: #8d24aa;
+    }
+
+    .content{
+        display: flex;
+        flex-grow: 1;
+        overflow-y: scroll;
+        flex-direction: column-reverse;
+        height: 100vh;
+        background-color: #f8f8f8;
+    }
+
+    .content::-webkit-scrollbar{
+        display: none;
+    }
+
+    .message-box{
+        display: flex;
+        flex-direction: column;
+
+        padding-bottom: 5px;
+        justify-content: flex-end;
+        align-items: flex-start;
+        width: 100%;
+    }
+    .footer{
+        display: flex;
+        flex-grow: 0;
+        height: 50px;
+
+        background-color: coral;
+    }
+
+    .message-input{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+
+        width: 100%;
+
+      flex-wrap:nowrap
+    }
+
+    .message-input > form-input{
+      display: flex;
+      flex-grow: 8;
+
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .btn-send{
+      background: url("./img/send_btn.png") 100% 100% no-repeat;
+      background-position: center;
+      background-size: contain; /* Масштабируем фон */
+      flex-grow: 1;
+
+      min-width: 40px;
+    }
+
+    .btn-send:active {
+      background-color: #8c24aa;
+      transition: 0.3s;
+    }

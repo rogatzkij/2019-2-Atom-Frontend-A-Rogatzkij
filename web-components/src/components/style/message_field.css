@@ -1,0 +1,68 @@
+/* Сообщение */
+.message{
+  display: flex;
+  flex-direction: column;
+
+  max-width: 60%;
+
+  margin: 5px 10px 5px 10px;
+  padding: 10px;
+  background-color: #f3e6f5;
+
+  border-radius: 4px;
+  border: 1px solid #e7dce9;
+  box-shadow: 0 0 5px #c2bcc37e;
+}
+
+.message > p{
+  font-size: 20px;
+}
+
+.author{
+  align-self: flex-end;
+  background-color: #fff;
+}
+
+/* Текст сообщения */
+.message-content{
+  /* Пренос слов */
+  overflow-wrap: break-word;
+
+  display: block;
+}
+
+/* Блок с временем и галочкой */
+.message-meta{
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+/* Время сообщения */
+.meta-time{
+  display: inline;
+  font-size: 14px;
+
+  color: #918791;
+}
+
+/* Галочка у сообщения */
+.meta-status{
+  display: none;
+
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.author > .message-meta > .meta-status{
+  display: inline-block;
+
+  background: url("./img/check.png") 100% 100% no-repeat;
+  background-size: cover; /* Масштабируем фон */
+}
+
+.readen > .message-meta > .meta-status{
+  background: url("./img/double_check.png") 100% 100% no-repeat;
+  background-size: cover; /* Масштабируем фон */
+}
